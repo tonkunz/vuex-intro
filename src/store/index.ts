@@ -1,6 +1,21 @@
-import { createStore } from 'vuex'
+import { InjectionKey } from 'vue'
+import { createStore, Store } from 'vuex'
 
-export default createStore({
+// Models
+import { Todo } from '@/models/Todo'
+
+/** Definição do tipo da estado na Store
+ * https://next.vuex.vuejs.org/guide/typescript-support.html#typing-store-property-in-vue-component
+*/
+export interface State {
+  count: number;
+  todos: Array<Todo>;
+}
+
+// Definição da Injection Key, usada no use store
+export const key: InjectionKey<Store<State>> = Symbol('Store Injection Key')
+
+export const store = createStore<State>({
   state: {
     count: 0,
     todos: [
@@ -16,7 +31,7 @@ export default createStore({
     increment (state) {
       state.count++
     },
-    toggleTodo (state, todo) {
+    toggleTodo (state, todo: Todo) {
       const todoIndex = state.todos.indexOf(todo)
 
       state.todos[todoIndex].done = !state.todos[todoIndex].done
@@ -48,7 +63,7 @@ export default createStore({
      * Isso é particularmente útil quando você deseja consultar um Array no store:
      */
     getTodoById: state => (id: number) => {
-      return state.todos.find(todo => todo.id === id)
+      return state.todos.find((todo: Todo) => todo.id === id)
     }
   },
   modules: {

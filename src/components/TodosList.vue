@@ -17,12 +17,13 @@
 <script lang="ts">
 import { useStore } from 'vuex'
 import { defineComponent, computed, ComputedRef } from 'vue'
+import { key } from '@/store'
 
 export default defineComponent({
   name: 'TodoList',
   setup () {
     // Conecta a store
-    const store = useStore()
+    const store = useStore(key)
 
     const todos: ComputedRef<Array<any>> =
       computed((): Array<any> => store.state.todos)

@@ -11,11 +11,12 @@
 <script lang="ts">
 import { useStore } from 'vuex'
 import { computed, ComputedRef, defineComponent } from 'vue'
+import { key } from '@/store'
 
 export default defineComponent({
   name: 'CountContainer',
   setup () {
-    const store = useStore()
+    const store = useStore(key)
 
     /** Computed Property on Composition API:
      * ReadonlyRef or WritableComputedRef
