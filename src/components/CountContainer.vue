@@ -12,6 +12,7 @@
 import { useStore } from 'vuex'
 import { computed, ComputedRef, defineComponent } from 'vue'
 import { key } from '@/store'
+import { INCREMENT } from '@/store/mutations-types'
 
 export default defineComponent({
   name: 'CountContainer',
@@ -25,7 +26,7 @@ export default defineComponent({
 
     return {
       count,
-      increment: () => store.commit('increment')
+      increment: () => store.commit(INCREMENT)
     }
   }
 })

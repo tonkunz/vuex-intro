@@ -1,5 +1,6 @@
 import { InjectionKey } from 'vue'
 import { createStore, Store } from 'vuex'
+import { INCREMENT } from './mutations-types'
 
 // Models
 import { Todo } from '@/models/Todo'
@@ -28,7 +29,10 @@ export const store = createStore<State>({
    * Vuex é por confirmar (ou fazer commit de) uma mutação.
    */
   mutations: {
-    increment (state) {
+    /** podemos usar o recurso de nome do dado computado do ES2015
+     * para usar uma constante como o nome da função
+     */
+    [INCREMENT] (state) {
       state.count++
     },
     toggleTodo (state, todo: Todo) {
@@ -37,8 +41,7 @@ export const store = createStore<State>({
       state.todos[todoIndex].done = !state.todos[todoIndex].done
     }
   },
-  actions: {
-  },
+  actions: {},
   /** GETTERS
    * Você pode pensar neles como dados computados para os stores.
    * Como os dados computados, o resultado de um getter é armazenado

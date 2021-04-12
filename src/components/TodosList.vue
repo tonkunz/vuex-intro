@@ -18,6 +18,7 @@
 import { useStore } from 'vuex'
 import { defineComponent, computed, ComputedRef } from 'vue'
 import { key } from '@/store'
+import { Todo } from '@/models/Todo'
 
 export default defineComponent({
   name: 'TodoList',
@@ -25,12 +26,12 @@ export default defineComponent({
     // Conecta a store
     const store = useStore(key)
 
-    const todos: ComputedRef<Array<any>> =
-      computed((): Array<any> => store.state.todos)
+    const todos: ComputedRef<Array<Todo>> =
+      computed((): Array<Todo> => store.state.todos)
     const doneTodosCount: ComputedRef<number> =
       computed((): number => store.getters.doneTodosCount)
 
-    const toggleTodo = (todo: any): void => store.commit('toggleTodo', todo)
+    const toggleTodo = (todo: Todo): void => store.commit('toggleTodo', todo)
 
     return {
       todos,
